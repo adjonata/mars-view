@@ -8,4 +8,11 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  modules: ["@vueuse/nuxt", "@pinia/nuxt"],
+  plugins: ["~/plugins/toastify", "~/plugins/axios"],
+  runtimeConfig: {
+    public: {
+      API_BASE_URL: process.env.API_BASE_URL,
+    },
+  },
 });

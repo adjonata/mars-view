@@ -9,7 +9,18 @@ export default {
     "./error.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      container: {
+        screens: {
+          sm: "100%",
+          md: "100%",
+          lg: "1280px",
+          xl: "1280px",
+          "2xl": "1280px",
+        },
+        center: true,
+      },
+    },
   },
   plugins: [],
 };
