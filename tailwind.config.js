@@ -19,6 +19,7 @@ export default {
           "2xl": "1280px",
         },
         center: true,
+        padding: "24px",
       },
     },
   },

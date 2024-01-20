@@ -1,7 +1,8 @@
 <template>
-  <main class="w-full h-[100vh]">
+  <main class="w-full min-h-[100vh] pb-20">
     <MoleculesPainelDashboardHead />
     <MoleculesPainelDashboardManifests />
+    <MoleculesPainelDashboardPhotos />
   </main>
 </template>
 

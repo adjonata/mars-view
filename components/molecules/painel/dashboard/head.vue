@@ -1,5 +1,5 @@
 <template>
-  <nav class="container flex justify-end py-6">
+  <nav class="container flex justify-center lg:justify-end py-6">
     <AtomsButton variant="secondary" outline @click="painelStore.logout()"
       >Sair</AtomsButton
     >

@@ -5,6 +5,7 @@ import type { LoginData, User } from "~/types/auth";
 export const usePainelStore = defineStore("painel", () => {
   const authStorage = useLocalStorage<undefined | string>("auth", undefined);
   const user = ref<User>();
+  const token = ref<string>();
 
   const isAuthenticated = computed(() => !!user.value);
 
@@ -20,6 +21,7 @@ export const usePainelStore = defineStore("painel", () => {
     const { data } = await authService.login(loginData);
     setTokenHeader(data.token);
     user.value = data.user;
+    token.value = data.token;
     authStorage.value = JSON.stringify(data);
   };
 
@@ -27,6 +29,7 @@ export const usePainelStore = defineStore("painel", () => {
     if (authStorage.value) {
       const authData = JSON.parse(authStorage.value) as LoginResponse;
       user.value = authData.user;
+      token.value = authData.token;
       setTokenHeader(authData.token);
     }
   };
@@ -35,6 +38,7 @@ export const usePainelStore = defineStore("painel", () => {
     setTokenHeader(undefined);
     authStorage.value = undefined;
     user.value = undefined;
+    token.value = undefined;
     window.location.reload();
   };
 
@@ -44,5 +48,6 @@ export const usePainelStore = defineStore("painel", () => {
     user,
     isAuthenticated,
     logout,
+    token,
   };
 });

@@ -1,8 +1,10 @@
 <template>
   <article
-    class="container min-h-[200px] mt-6 rounded-md grid grid-cols-2 gap-4"
+    class="container min-h-[200px] mt-6 rounded-md grid grid-cols-1 lg:grid-cols-2 gap-4"
   >
-    <div class="flex flex-col justify-center gap-2 lg:pr-5">
+    <div
+      class="flex flex-col justify-center gap-2 lg:pr-5 text-center lg:text-left"
+    >
       <span class="text-2xl text-white">Manifestos das missões</span>
       <p class="text-lg text-gray-300">
         Refere-se ao registro diário que cataloga informações detalhadas,
@@ -10,13 +12,13 @@
         utilizadas para tal.
       </p>
     </div>
-    <div class="flex flex-col items-center justify-center">
+    <div class="flex flex-col items-end justify-center">
       <AtomsButton :loading="isLoading" @click="handleSyncManifests"
         >Sincronizar manifestos</AtomsButton
       >
     </div>
   </article>
-  <hr class="border-slate-500" />
+  <hr class="border-slate-500 mt-6 mb-10" />
 </template>
 
 <script setup lang="ts">
