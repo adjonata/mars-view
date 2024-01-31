@@ -33,6 +33,13 @@ const isLoading = ref(false);
 
 const handleLogin = async () => {
   try {
+    if (!email.value || !password.value) {
+      useNuxtApp().$toast("Preencha todos os dados!", {
+        type: "error",
+        position: "bottom-center",
+      });
+      return;
+    }
     isLoading.value = true;
     await painelStore.handleLogin({
       email: email.value,

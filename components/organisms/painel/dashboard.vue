@@ -1,9 +1,7 @@
 <template>
-  <main class="w-full min-h-[100vh] pb-20">
-    <MoleculesPainelDashboardHead />
-    <MoleculesPainelDashboardManifests />
-    <MoleculesPainelDashboardPhotos />
-  </main>
+  <MoleculesPainelDashboardHead />
+  <MoleculesPainelDashboardManifests />
+  <MoleculesPainelDashboardPhotos />
 </template>
 
 <script setup lang="ts">

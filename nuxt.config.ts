@@ -8,7 +8,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ["@vueuse/nuxt", "@pinia/nuxt"],
+  modules: ["@vueuse/nuxt", "@pinia/nuxt", "radix-vue/nuxt"],
   plugins: ["~/plugins/toastify", "~/plugins/axios"],
   runtimeConfig: {
     public: {

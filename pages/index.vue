@@ -1,8 +1,11 @@
 <template>
-  <div class="bg-red-600"></div>
+  <OrganismsViewer />
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: "viewer",
+});
 useHead({
   title: "Início - Mars View",
 });

@@ -25,6 +25,7 @@
     "@vueuse/nuxt": "^10.7.2",
     "axios": "^1.6.5",
     "pinia": "^2.1.7",
+    "radix-vue": "^1.3.2",
     "socket.io-client": "^4.7.4",
     "vue3-toastify": "^0.2.1"
   }
