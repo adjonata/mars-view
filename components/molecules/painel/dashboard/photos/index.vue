@@ -5,26 +5,24 @@
       @submit.prevent="handleSync"
       class="col-span-1 lg:col-span-3 flex flex-col gap-5"
     >
-      <AtomsInput
-        v-model="minDate"
-        type="date"
-        name="min-date"
-        title="Data inicial"
+      <VueDatePicker
+        v-model="range"
+        range
+        dark
+        :max-date="new Date()"
+        format="dd/MM/yyyy"
+        locale="pt-BR"
+        placeholder="Selecione o período"
       />
-      <AtomsInput
-        v-model="maxDate"
-        type="date"
-        name="min-date"
-        title="Data final"
-      />
-      <AtomsButton type="submit" :loading="isLoading"
-        >Sincronizar fotos</AtomsButton
-      >
+      <AtomsButton type="submit" :loading="isLoading">
+        Sincronizar fotos
+      </AtomsButton>
     </form>
   </article>
 </template>
 
 <script setup lang="ts">
+import VueDatePicker from "@vuepic/vue-datepicker";
 const syncStore = useSyncStore();
 
 onMounted(() => {
@@ -35,16 +33,7 @@ onUnmounted(() => {
   syncStore.closeSocket();
 });
 
-const minDate = ref("");
-const maxDate = ref("");
-watch(
-  () => minDate.value,
-  (value) => {
-    if (!maxDate.value) {
-      maxDate.value = value;
-    }
-  }
-);
+const range = ref<[Date, Date]>();
 
 const isLoading = ref(false);
 
@@ -52,8 +41,11 @@ const handleSync = async () => {
   isLoading.value = true;
 
   try {
-    if (!minDate.value || !maxDate.value) return;
-    syncStore.syncPhotosByPeriod(minDate.value, maxDate.value);
+    if (!range.value?.[0] || !range.value?.[1]) return;
+    syncStore.syncPhotosByPeriod(
+      range.value?.[0].toISOString(),
+      range.value?.[1].toISOString()
+    );
   } catch (error) {
     useNuxtApp().$toast("Erro ao sincronizar fotos por período", {
       type: "error",

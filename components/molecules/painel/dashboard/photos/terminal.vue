@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-4 items-start">
-    <div class="terminal">
+    <div class="terminal" ref="terminalRef">
       <div
         class="terminal__line"
         v-for="(log, logIndex) in syncStore.logs"
@@ -19,16 +19,30 @@
 
 <script setup lang="ts">
 const syncStore = useSyncStore();
+
+const terminalRef = ref<HTMLDivElement>();
+
+watch(
+  () => syncStore.logs.length,
+  () => scrollTerminalToBottom()
+);
+const scrollTerminalToBottom = () => {
+  if (terminalRef.value) {
+    terminalRef.value?.scrollTo({
+      top: 1000000,
+    });
+  }
+};
 </script>
 
 <style scoped lang="scss">
 .terminal {
-  @apply w-full p-4 bg-slate-800 rounded border-2 border-slate-900 h-[400px] overflow-y-auto;
+  @apply w-full p-4 bg-zinc-900 rounded border-2 border-zinc-900 h-[400px] overflow-y-auto;
 
   &__line {
-    @apply w-full border-b border-b-slate-700 py-3;
+    @apply w-full border-b border-b-zinc-700 py-3;
     span {
-      @apply text-slate-200 text-base;
+      @apply text-zinc-200 text-base;
     }
   }
 }

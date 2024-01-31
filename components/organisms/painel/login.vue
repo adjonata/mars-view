@@ -11,7 +11,11 @@
         type="password"
         title="Senha"
       />
-      <AtomsButton type="submit">Entrar</AtomsButton>
+      <AtomsButton type="submit" :loading="isLoading">Entrar</AtomsButton>
+
+      <hr class="border-slate-500 my-4" />
+
+      <AtomsButton to="/" variant="secondary">Voltar ao início</AtomsButton>
     </form>
   </div>
 </template>
@@ -25,8 +29,11 @@ const painelStore = usePainelStore();
 const email = ref("");
 const password = ref("");
 
+const isLoading = ref(false);
+
 const handleLogin = async () => {
   try {
+    isLoading.value = true;
     await painelStore.handleLogin({
       email: email.value,
       password: password.value,
@@ -42,6 +49,8 @@ const handleLogin = async () => {
       type: "error",
       position: "bottom-center",
     });
+  } finally {
+    isLoading.value = false;
   }
 };
 </script>

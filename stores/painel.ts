@@ -6,6 +6,7 @@ export const usePainelStore = defineStore("painel", () => {
   const authStorage = useLocalStorage<undefined | string>("auth", undefined);
   const user = ref<User>();
   const token = ref<string>();
+  const isLoaded = ref(false);
 
   const isAuthenticated = computed(() => !!user.value);
 
@@ -32,6 +33,9 @@ export const usePainelStore = defineStore("painel", () => {
       token.value = authData.token;
       setTokenHeader(authData.token);
     }
+    setTimeout(() => {
+      isLoaded.value = true;
+    }, 500);
   };
 
   const logout = () => {
@@ -39,10 +43,10 @@ export const usePainelStore = defineStore("painel", () => {
     authStorage.value = undefined;
     user.value = undefined;
     token.value = undefined;
-    window.location.reload();
   };
 
   return {
+    isLoaded,
     handleLogin,
     loadSession,
     user,

@@ -34,6 +34,6 @@ const changeValue = (event: Event) => {
 
 <style lang="scss" scoped>
 .input {
-  @apply w-full h-[50px] py-2 px-4 rounded-lg bg-transparent border-gray-400 border-2 outline-none focus:border-amber-500 text-white;
+  @apply w-full h-[50px] py-2 px-4 rounded-lg bg-transparent border-gray-400 border-2 outline-none focus:border-amber-600 text-white;
 }
 </style>

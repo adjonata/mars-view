@@ -1,3 +1,4 @@
+@import "@vuepic/vue-datepicker/dist/main.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,5 +9,25 @@
 }
 
 body {
-  @apply bg-gray-700;
+  @apply bg-zinc-800;
+}
+
+/* width */
+::-webkit-scrollbar {
+  @apply w-[10px];
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-zinc-600 rounded-[5px];
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-300 cursor-pointer rounded-[5px];
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-zinc-300;
 }

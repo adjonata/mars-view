@@ -18,19 +18,20 @@
       >
     </div>
   </article>
-  <hr class="border-slate-500 mt-6 mb-10" />
+  <hr class="border-zinc-600 mt-6 mb-10" />
 </template>
 
 <script setup lang="ts">
 import { manifestsService } from "~/services/manifests";
 
 const isLoading = ref(false);
+const syncStore = useSyncStore();
 
 const handleSyncManifests = async () => {
-  console.log("teste");
   isLoading.value = true;
   try {
     await manifestsService.sync();
+    syncStore.pushLog("Success in manifests synchronization");
     useNuxtApp().$toast("Manifestos sincronizados", {
       position: "top-center",
       type: "success",

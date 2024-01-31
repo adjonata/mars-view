@@ -6,7 +6,7 @@ export const useSyncStore = defineStore("sync", () => {
   const painelStore = usePainelStore();
 
   const logsStorage = useLocalStorage<undefined | string>(
-    "sync-logs",
+    "terminal",
     undefined
   );
   const logs = ref<string[]>([]);
@@ -16,9 +16,9 @@ export const useSyncStore = defineStore("sync", () => {
     }
   });
   watch(
-    () => logs.value,
-    (allLogs) => {
-      logsStorage.value = JSON.stringify(allLogs);
+    () => logs.value.length,
+    () => {
+      logsStorage.value = JSON.stringify(logs.value);
     }
   );
 
@@ -45,14 +45,13 @@ export const useSyncStore = defineStore("sync", () => {
 
   const registerSocket = () => {
     socket?.value?.on("status", (value: string) => {
-      console.log(value);
-      logs.value?.push(value);
+      pushLog(value);
     });
     socket?.value?.on("error", (value: object) => {
-      logs.value?.push(`Error - ${JSON.stringify(value)}`);
+      pushLog(`Error - ${JSON.stringify(value)}`);
     });
     socket?.value?.on("success", (value: object) => {
-      logs.value?.push(`Success - ${JSON.stringify(value)}`);
+      pushLog(`Success - ${JSON.stringify(value)}`);
     });
   };
 
@@ -62,8 +61,9 @@ export const useSyncStore = defineStore("sync", () => {
   };
 
   const syncPhotosByPeriod = (minDate: string, maxDate: string) => {
-    socket.value?.send(
-      `{ "command": "sync-images", "data": {"minDate":"${minDate}", "maxDate": "${maxDate}"}}`
+    socket.value?.emit(
+      "sync",
+      `{"minDate":"${minDate}", "maxDate": "${maxDate}"}`
     );
   };
 
@@ -72,11 +72,16 @@ export const useSyncStore = defineStore("sync", () => {
     logsStorage.value = undefined;
   };
 
+  const pushLog = (value: string) => {
+    logs.value?.push(value);
+  };
+
   return {
     logs,
     closeSocket,
     openSocket,
     syncPhotosByPeriod,
     clearLogs,
+    pushLog,
   };
 });

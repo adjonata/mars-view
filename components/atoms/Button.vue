@@ -4,13 +4,13 @@
     :class="[
       variant === 'primary'
         ? outline
-          ? 'border-amber-600 border-2 bg-transparent'
-          : 'bg-amber-600'
+          ? 'border-amber-700 border-2 bg-transparent'
+          : 'bg-amber-700'
         : '',
       variant === 'secondary'
         ? outline
-          ? 'border-slate-500 border-2 bg-transparent'
-          : 'bg-slate-500'
+          ? 'border-zinc-500 border-2 bg-transparent'
+          : 'bg-zinc-500'
         : '',
       disabled && 'contrast-50 cursor-not-allowed',
       loading && 'contrast-75 cursor-not-allowed',
@@ -18,10 +18,14 @@
     @click="
       () => {
         if (loading) return;
+        if (to) {
+          router.push(to);
+        }
         emit('click');
       }
     "
     :disabled="disabled"
+    :type="type"
   >
     <AtomsSpinner v-if="loading" />
     <slot></slot>
@@ -38,6 +42,7 @@ withDefaults(
     outline?: boolean;
     loading?: boolean;
     disabled?: boolean;
+    to?: string;
   }>(),
   { type: "button", variant: "primary" }
 );
@@ -45,6 +50,8 @@ withDefaults(
 const emit = defineEmits<{
   (e: "click"): void;
 }>();
+
+const router = useRouter();
 </script>
 
 <style scoped lang="scss">
