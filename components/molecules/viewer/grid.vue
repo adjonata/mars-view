@@ -5,7 +5,7 @@ import Image from "primevue/image";
 
 <template>
   <section
-    class="w-full grid grid-cols-2 auto-rows-min lg:grid-cols-4 gap-4 mt-10"
+    class="w-full grid grid-cols-2 auto-rows-min lg:grid-cols-4 gap-2 lg:gap-4 mt-10"
   >
     <Image
       v-for="photo in viewerStore.photos"
