@@ -24,15 +24,16 @@ export const useViewerStore = defineStore("viewer", () => {
   const fetchPhotos = async (filters?: FetchPhotosQuery) => {
     try {
       isLoadingMore.value = true;
+
+      if (filters) lastQuery.value = filters;
+
       const isFetchingMore = !filters;
-      if (isFetchingMore) {
+      if (!isFetchingMore) {
         pagination.value = {
           itemsPerPage: 20,
           page: 1,
           totalPages: 1,
         };
-      } else {
-        lastQuery.value = filters;
       }
 
       const response = await photosService.query({
