@@ -10,8 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@types/vue-select": "^3.16.8",
     "autoprefixer": "^10.4.17",
     "nuxt": "^3.8.2",
+    "nuxt-primevue": "^0.2.2",
     "postcss": "^8.4.33",
     "sass": "^1.70.0",
     "tailwindcss": "^3.4.1",
@@ -25,8 +27,10 @@
     "@vueuse/nuxt": "^10.7.2",
     "axios": "^1.6.5",
     "pinia": "^2.1.7",
+    "primevue": "^3.47.2",
     "radix-vue": "^1.3.2",
     "socket.io-client": "^4.7.4",
+    "vue-select": "^4.0.0-beta.6",
     "vue3-toastify": "^0.2.1"
   }
 }

@@ -1,4 +1,6 @@
 @import "@vuepic/vue-datepicker/dist/main.css";
+@import "vue-select/dist/vue-select.css";
+@import url("primevue/resources/themes/aura-light-green/theme.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
