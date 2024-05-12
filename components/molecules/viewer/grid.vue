@@ -5,7 +5,16 @@ import Image from "primevue/image";
 
 <template>
   <section
+    class="w-full h-[200px] flex items-center justify-center text-center"
+    v-if="viewerStore.notFoundedPhotos"
+  >
+    <span class="text-[16px] text-gray-200"
+      >Nenhuma foto encontrada no período selecionado.</span
+    >
+  </section>
+  <section
     class="w-full grid grid-cols-2 auto-rows-min lg:grid-cols-4 gap-2 lg:gap-4 mt-10"
+    v-else
   >
     <Image
       v-for="photo in viewerStore.photos"

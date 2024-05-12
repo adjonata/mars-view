@@ -19,9 +19,9 @@ export const useViewerStore = defineStore("viewer", () => {
 
   const lastQuery = ref<FetchPhotosQuery>();
 
-  const isLoadingMore = ref(false);
+  const isLoadingMore = ref();
 
-  const fetchPhotos = async (filters?: FetchPhotosQuery) => {
+  const fetchPhotos = async (filters?: FetchPhotosQuery, clear?: boolean) => {
     try {
       isLoadingMore.value = true;
 
@@ -34,6 +34,10 @@ export const useViewerStore = defineStore("viewer", () => {
           page: 1,
           totalPages: 1,
         };
+      }
+
+      if (clear) {
+        photos.value = [];
       }
 
       const response = await photosService.query({
@@ -75,11 +79,16 @@ export const useViewerStore = defineStore("viewer", () => {
     isLoadingMore.value = false;
   };
 
+  const notFoundedPhotos = computed(
+    () => isLoadingMore.value === false && !photos.value?.length
+  );
+
   return {
     photos,
     fetchPhotos,
     canFetchMore,
     fetchMore,
     isLoadingMore,
+    notFoundedPhotos,
   };
 });

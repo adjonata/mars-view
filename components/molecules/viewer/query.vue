@@ -6,18 +6,24 @@ import { camerasOptions } from "@/utils/cameras";
 
 const viewerStore = useViewerStore();
 
-const range = ref<[Date, Date]>([subDays(new Date(), 30), new Date()]);
+const range = ref<[Date, Date]>([
+  new Date("2024-01-05"),
+  new Date("2024-02-06"),
+]);
 const cameras = ref<Option[]>([]);
 
 const isLoading = ref(false);
 
 const handleFetch = async () => {
   isLoading.value = true;
-  await viewerStore.fetchPhotos({
-    cameras: cameras ? cameras.value.map((c) => c.value) : undefined,
-    minDate: range.value[0].toISOString(),
-    maxDate: range.value[1].toISOString(),
-  });
+  await viewerStore.fetchPhotos(
+    {
+      cameras: cameras ? cameras.value.map((c) => c.value) : undefined,
+      minDate: range.value[0].toISOString(),
+      maxDate: range.value[1].toISOString(),
+    },
+    true
+  );
   isLoading.value = false;
 };
 
@@ -57,6 +63,7 @@ onMounted(async () => {
           class="max-w-[300px]"
           :clearable="false"
           :disabled="isLoading"
+          auto-apply
         />
       </AtomsLabel>
     </div>
